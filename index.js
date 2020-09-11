@@ -21,9 +21,6 @@ connect.then((db) => {
     .then((collection) => {
         console.log(`The dishes data is ${collection}`);
 
-        // for(const dish of dishes){
-        //     dishes.remove(dish);
-        // }
         return dishes.deleteMany({}); 
     })
     .then(() => {
