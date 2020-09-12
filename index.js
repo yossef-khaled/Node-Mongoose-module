@@ -7,25 +7,22 @@ const connect = mongoose.connect(url);
 connect.then((db) => {
     console.log('Connected to MongoDB successefully');
 
-    var firstDish = dishes({
-        name: "Pizza",
-        description: "Dummy data for test"
-    });
-
-    var secondDish = dishes({
-        name:"something",
-        description: "fadjfak;djf;akejf;akjf"
-    });
-
     dishes.deleteMany({})
     .then(() => {
-        return firstDish.save()
+        return dishes.create({
+            name: "Pizza",
+            description: "Dummy data for test"
+        })
     })
     .then((dish) => {
         console.log(`Successefully added ${dish}`);
-        return secondDish.save();
+
+        return dishes.create({
+            name:"something",
+            description: "fadjfak;djf;akejf;akjf"
+        })
     })
-    .then((dish) =>{
+    .then((dish) => {
         console.log(`Successefully added ${dish}`);
 
         return dishes.find({});
