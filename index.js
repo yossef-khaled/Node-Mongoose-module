@@ -12,7 +12,19 @@ connect.then((db) => {
         description: "Dummy data for test"
     });
 
-    firstDish.save()
+    var secondDish = dishes({
+        name:"something",
+        description: "fadjfak;djf;akejf;akjf"
+    });
+
+    dishes.deleteMany({})
+    .then(() => {
+        return firstDish.save()
+    })
+    .then((dish) => {
+        console.log(`Successefully added ${dish}`);
+        return secondDish.save();
+    })
     .then((dish) =>{
         console.log(`Successefully added ${dish}`);
 
