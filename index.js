@@ -25,6 +25,24 @@ connect.then((db) => {
     .then((dish) => {
         console.log(`Successefully added ${dish}`);
 
+        return dishes.findByIdAndUpdate(dish._id, {
+            $set: {description: "Updated description"}
+        }, {
+            new: true
+        })
+        .exec();
+    })
+    .then((dish) => {
+        dish.comments.push({
+            rating: 4,
+            comment: "Delecious dish!!",
+            author: "Youssef Khaled"
+        });
+        return dish.save();
+    })
+    .then((dish) => {
+        console.log(`Updated and added new comment to ${dish}`);
+
         return dishes.find({});
     })
     .then((collection) => {
